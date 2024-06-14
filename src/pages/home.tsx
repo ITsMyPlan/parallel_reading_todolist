@@ -1,8 +1,10 @@
+import HomeHeader from '@components/common/Header';
+
 function home() {
   return (
-    <div>
-      Home Page
-    </div>
+    <>
+      <HomeHeader>Today's Reading</HomeHeader>
+    </>
   )
 }
 
