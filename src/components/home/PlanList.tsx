@@ -1,6 +1,6 @@
 import Plan from '@components/common/Plan';
 
-function ContentList() {
+function PlanList() {
   const dummyPlans = [
     {
       id: 1,
@@ -20,4 +20,4 @@ function ContentList() {
   </div>
 }
 
-export default ContentList;
+export default PlanList;
