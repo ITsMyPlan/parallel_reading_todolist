@@ -1,9 +1,14 @@
 import SubmitButton from '@components/common/Button';
 import InputContainer from '@/components/common/Container';
 import Header from '@/components/common/Header';
+import { SupabaseError } from '@/types/SupabaseError'; 
 import { useState } from 'react';
+import { supabase } from '@/supabaseClient.js';
+import { useNavigate } from 'react-router-dom';
 
 function form() {
+  const navigate = useNavigate();
+
   const initialFormData = {
     book_name: '',
     author: '',
@@ -22,8 +27,17 @@ function form() {
     });
   };
 
-  const onSubmitButtonClick = () => {
-    console.log('click!')
+  const onSubmitButtonClick = async () => {
+    try {
+      const { error } = await supabase.from('plans').insert([formData]);
+      if (error) {
+        throw error;
+      }
+      setFormData(initialFormData);
+      navigate('/home');
+    } catch (error: SupabaseError) {
+      alert(error.message);
+    }
   };
 
   return (
