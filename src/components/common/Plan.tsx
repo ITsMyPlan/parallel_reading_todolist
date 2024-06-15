@@ -1,14 +1,7 @@
-interface planConfig {
-  id: number,
-  book_name: string,
-  author: string,
-  description: string,
-  start_date: Date,
-  end_date: Date
-}
+import { PlanConfig } from '@types/PlanConfig';
 
 interface PlanProps {
-  data: planConfig
+  data: PlanConfig
 }
 
 function Plan(props: PlanProps) {
