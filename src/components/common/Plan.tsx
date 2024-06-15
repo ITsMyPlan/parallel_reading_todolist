@@ -15,7 +15,7 @@ function Plan(props: PlanProps) {
   }
 
   return (
-    <div className="border border-solid border-yw-100 border-10 p-2 flex flex-col mt-5">
+    <div className="border-8 border-solid border-yw-50/50 inset-blur rounded-lg p-2 flex flex-col mt-5">
       <div>책 이름: {data.book_name}</div>
       <div>저자: {data.author}</div>
       <div>설명: {data.description}</div>
