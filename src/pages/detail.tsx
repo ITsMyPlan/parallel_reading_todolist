@@ -5,6 +5,7 @@ import { PlanConfig } from '@types/PlanConfig';
 import { SupabaseError } from '@/types/SupabaseError'
 import Container from '@/components/common/Container';
 import Header from '@/components/common/Header';
+import DeleteButton from '@/components/common/Button';
 
 function detail() {
   const { id } = useParams();
@@ -49,6 +50,7 @@ function detail() {
       <Container label="End Date">
         {plan.end_date}
       </Container>
+      <DeleteButton onButtonClick={() => console.log('click') }>Delete</DeleteButton>
     </>
   );
 }
