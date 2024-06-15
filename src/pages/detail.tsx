@@ -38,6 +38,27 @@ function detail() {
     }
   }
 
+  const onEditButtonClick = async () => {
+    if (!isEditing) return;
+
+    try {
+      const { error } = await supabase
+        .from('plans')
+        .update(plan)
+        .eq('id', id);
+    
+      if (error) {
+        throw error;
+      } else {
+        navigate(`/about/${id}`);
+      }
+    } catch (error: SupabaseError) {
+      console.log('An error occurred while deleting plan:', error.message);
+    } finally {
+      updateEditingStatus(false);
+    }
+  }
+
   useEffect(() => {
     const fetchPlans = async () => {
       try {
@@ -79,7 +100,7 @@ function detail() {
       </Container>
       {
         isEditing ? (
-          <EditButton onButtonClick={() => console.log('edit') }>Edit</EditButton>
+          <EditButton onButtonClick={onEditButtonClick}>Edit</EditButton>
         ) : (
           <DeleteButton onButtonClick={onDeleteButtonClick}>Delete</DeleteButton>
         )
