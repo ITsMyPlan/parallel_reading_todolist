@@ -44,7 +44,7 @@ function form() {
       <InputContainer label="End Date">
         <input type="date" name="end_date" onChange={handleChange} value={formData.end_date} />
       </InputContainer>
-      <SubmitButton onClick={onSubmitButtonClick}>Submit</SubmitButton>
+      <SubmitButton onButtonClick={onSubmitButtonClick}>Submit</SubmitButton>
     </div>
   )
 }
