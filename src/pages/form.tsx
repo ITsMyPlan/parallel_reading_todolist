@@ -1,5 +1,6 @@
 import SubmitButton from '@components/common/Button';
 import InputContainer from '@/components/common/Container';
+import Header from '@/components/common/Header';
 import { useState } from 'react';
 
 function form() {
@@ -27,6 +28,7 @@ function form() {
 
   return (
     <div>
+      <Header>Add New Reading Plan</Header>
       <InputContainer label="Book name">
         <input type="text" name="book_name" placeholder='bookName' onChange={handleChange} value={formData.book_name} />
       </InputContainer>
