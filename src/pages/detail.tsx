@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { supabase } from '@/supabaseClient.js';
 import { PlanConfig } from '@types/PlanConfig';
@@ -32,6 +32,25 @@ function detail() {
 
     fetchPlans();
   }, []);
+
+  const navigate = useNavigate();
+  const onDeleteButtonClick = async () => {
+    try {
+      const { error } = await supabase
+        .from('plans')
+        .delete()
+        .eq('id', id);
+        
+      if (error) {
+        throw error;
+      } else {
+        navigate('/home');
+      }
+    } catch (error: SupabaseError) {
+      alert(error.message);
+    }
+  }
+
   return (
     <>
       <Header>About A Reading Plan</Header>
@@ -50,7 +69,7 @@ function detail() {
       <Container label="End Date">
         {plan.end_date}
       </Container>
-      <DeleteButton onButtonClick={() => console.log('click') }>Delete</DeleteButton>
+      <DeleteButton onButtonClick={onDeleteButtonClick}>Delete</DeleteButton>
     </>
   );
 }
