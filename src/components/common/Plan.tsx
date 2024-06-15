@@ -1,4 +1,5 @@
 import { PlanConfig } from '@types/PlanConfig';
+import { useNavigate } from 'react-router-dom';
 
 interface PlanProps {
   data: PlanConfig
@@ -14,8 +15,13 @@ function Plan(props: PlanProps) {
     return `${year}-${month}-${day}`;
   }
 
+  const navigate = useNavigate();
+  const goToDetail = () => {
+    navigate(`/about/${data.id}`)
+  }
+
   return (
-    <div className="border-8 border-solid border-yw-50/50 inset-blur rounded-lg p-2 flex flex-col mt-5">
+    <div className="border-8 border-solid border-yw-50/50 rounded-lg p-2 flex flex-col mt-5" onClick={goToDetail}>
       <div>책 이름: {data.book_name}</div>
       <div>저자: {data.author}</div>
       <div>설명: {data.description}</div>
