@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { supabase } from '@/supabaseClient.js';
 import { PlanConfig } from '@types/PlanConfig';
@@ -19,6 +19,24 @@ function detail() {
       [name]: value
     });
   };
+
+  const navigate = useNavigate();
+  const onDeleteButtonClick = async () => {
+    try {
+      const { error } = await supabase
+        .from('plans')
+        .delete()
+        .eq('id', id);
+    
+      if (error) {
+        throw error;
+      } else {
+        navigate('/home');
+      }
+    } catch (error: SupabaseError) {
+      console.log('An error occurred while deleting plan:', error.message);
+    }
+  }
 
   useEffect(() => {
     const fetchPlans = async () => {
@@ -63,7 +81,7 @@ function detail() {
         isEditing ? (
           <EditButton onButtonClick={() => console.log('edit') }>Edit</EditButton>
         ) : (
-          <DeleteButton onButtonClick={() => console.log('click') }>Delete</DeleteButton>
+          <DeleteButton onButtonClick={onDeleteButtonClick}>Delete</DeleteButton>
         )
       }
     </>
