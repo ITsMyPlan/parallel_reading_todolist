@@ -26,7 +26,7 @@ function PlanList() {
 
     fetchPlans();
   }, [plans]);
-  return <div>
+  return <div className="mx-5">
     {
       plans.map((plan, index) => {
         return <Plan key={index} data={plan} />
