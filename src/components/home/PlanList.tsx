@@ -8,10 +8,13 @@ function PlanList() {
   const [plans, setPlans] = useState([]);
 
   useEffect(() => {
+    const today = new Date().toISOString().split('T')[0];
+
     const fetchPlans = async () => {
       const { data, error } = await supabase
         .from('plans')
-        .select('id, book_name, end_date, tasks(id, goal, created_at) ');
+        .select('id, book_name, end_date, tasks(id, goal, created_at) ')
+        .filter('tasks.created_at', 'eq', today);
       
       if (error) {
         console.error('Error fetching plans:', error);

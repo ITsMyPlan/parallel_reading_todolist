@@ -30,15 +30,16 @@ function Plan(props: PlanProps) {
   }
 
   return (
-    <div className="border-8 border-solid border-yw-50/50 rounded-lg p-2 flex flex-col mt-5" onClick={goToDetail}>
+    <div className="border-8 border-solid border-yw-50/50 rounded-lg p-2 flex flex-col mt-5">
+      <button className='bg-yw-100' onClick={goToDetail}>more</button>
       <div>책 이름: {data.book_name}</div>
-      {data.tasks.map((task: TaskConfig) => {
+      {data.tasks.length > 0 ? data.tasks.map((task: TaskConfig) => {
         return (
           <div key={task.id}>
             <div>{task.goal}</div>
           </div>
         );
-      })}
+      }) : <button className='bg-yw-100' onClick={ () => console.log('hi')}>오늘의 목표를 작성해봐요!</button>}
       <div>D-{daysRemaining}</div>
     </div>
   );
