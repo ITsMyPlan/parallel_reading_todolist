@@ -1,5 +1,6 @@
 import Plan from '@components/common/Plan';
 import { PlanConfig } from '@types/PlanConfig';
+import { TaskConfig } from '@types/TaskConfig';
 import { supabase } from '@/supabaseClient.js';
 import { useState, useEffect } from 'react';
 
@@ -10,22 +11,25 @@ function PlanList() {
     const fetchPlans = async () => {
       const { data, error } = await supabase
         .from('plans')
-        .select('*');
-
+        .select('id, book_name, end_date, tasks(id, goal, created_at) ');
+      
       if (error) {
         console.error('Error fetching plans:', error);
       } else {
         const plans = data.map((datum: PlanConfig) => ({
           ...datum,
-          start_date: new Date(datum.start_date),
-          end_date: new Date(datum.end_date)
+          end_date: new Date(datum.end_date),
+          tasks: datum.tasks.map((task: TaskConfig) => ({
+            ...task,
+            created_at: new Date(task.created_at)
+          }))
         }))
         setPlans(plans);
       }
     };
 
     fetchPlans();
-  }, [plans]);
+  }, []);
   return <div className="mx-5">
     {
       plans.map((plan, index) => {
