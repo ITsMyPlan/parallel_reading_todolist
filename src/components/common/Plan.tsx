@@ -1,19 +1,28 @@
 import { PlanConfig } from '@types/PlanConfig';
+import { TaskConfig } from '@types/TaskConfig';
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 interface PlanProps {
   data: PlanConfig
 }
 
+const getDaysRemaining = (end_date: Date) => {
+  if (!end_date) return '';
+
+  const today = new Date();
+  const timeDiff = end_date.getTime() - today.getTime();
+  const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+  return daysDiff.toString();
+}
+
 function Plan(props: PlanProps) {
   const { data } = props;
-  const getFormattedDate = (date: Date) :string => {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
+  const [daysRemaining, setDaysRemaining] = useState('');
 
-    return `${year}-${month}-${day}`;
-  }
+  useEffect(() => {
+    setDaysRemaining(getDaysRemaining(data.end_date));
+  }, [data.end_date]);
 
   const navigate = useNavigate();
   const goToDetail = () => {
@@ -23,10 +32,14 @@ function Plan(props: PlanProps) {
   return (
     <div className="border-8 border-solid border-yw-50/50 rounded-lg p-2 flex flex-col mt-5" onClick={goToDetail}>
       <div>책 이름: {data.book_name}</div>
-      <div>저자: {data.author}</div>
-      <div>설명: {data.description}</div>
-      <div>시작일: {getFormattedDate(data.start_date)}</div>
-      <div>완료일: {getFormattedDate(data.end_date)}</div>
+      {data.tasks.map((task: TaskConfig) => {
+        return (
+          <div key={task.id}>
+            <div>{task.goal}</div>
+          </div>
+        );
+      })}
+      <div>D-{daysRemaining}</div>
     </div>
   );
 }
