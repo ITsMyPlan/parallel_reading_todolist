@@ -28,6 +28,9 @@ function Plan(props: PlanProps) {
   const goToDetail = () => {
     navigate(`/about/${data.id}`)
   }
+  const goToAddTask = () => {
+    navigate(`/add_task/${data.id}`)
+  }
 
   return (
     <div className="border-8 border-solid border-yw-50/50 rounded-lg p-2 flex flex-col mt-5">
@@ -39,7 +42,7 @@ function Plan(props: PlanProps) {
             <div>{task.goal}</div>
           </div>
         );
-      }) : <button className='bg-yw-100' onClick={ () => console.log('hi')}>오늘의 목표를 작성해봐요!</button>}
+      }) : <button className='bg-yw-100' onClick={goToAddTask}>오늘의 목표를 작성해봐요!</button>}
       <div>D-{daysRemaining}</div>
     </div>
   );
