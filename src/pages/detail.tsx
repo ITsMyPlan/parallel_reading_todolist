@@ -2,7 +2,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { supabase } from '@/supabaseClient.js';
 import { PlanConfig } from '@types/PlanConfig';
-import { SupabaseError } from '@/types/SupabaseError'
+import { SupabaseError } from '@/types/SupabaseError';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 import Container from '@/components/common/Container';
 import Header from '@/components/common/Header';
 import DeleteButton from '@/components/common/Button';
@@ -38,7 +40,12 @@ function detail() {
     }
   }
 
-  const onEditButtonClick = async () => {
+  const onEditButtonClick = () => {
+    if (isEditing) return;
+    updateEditingStatus(true);
+  }
+
+  const onSubmitButtonClick = async () => {
     if (!isEditing) return;
 
     try {
@@ -82,25 +89,30 @@ function detail() {
   }, []);
   return (
     <>
-      <Header>{isEditing ? 'Edit this Reading Plan' : 'About A Reading Plan'}</Header>
-      <Container label="Book name" editable updateEditingStatus={updateEditingStatus} isEditing={isEditing}>
-        {isEditing ? <input type="text" name="book_name" value={plan.book_name} onChange={handleChange} /> : <span>{plan.book_name}</span>}
+      <Header>{isEditing ? 'Editing...' : 'About A Reading Plan'}</Header>
+      <div className="absolute top-5 right-5" onClick={onEditButtonClick}>
+        <button className="bg-yw-100/50 w-10 h-10 ml-0 rounded-full flex justify-center items-center">
+          <FontAwesomeIcon className="text-gr-70" icon={faPen} />
+        </button>
+      </div>
+      <Container label="Book name">
+        {isEditing ? <input className="w-full rounded-md border-0 py-1.5 pl-1 pr-20 ring-1 ring-inset ring-gray-300" type="text" name="book_name" value={plan.book_name} onChange={handleChange} /> : <span>{plan.book_name}</span>}
       </Container>
-      <Container label="Author" editable updateEditingStatus={updateEditingStatus} isEditing={isEditing}>
-        {isEditing ? <input type="text" name="author" value={plan.author} onChange={handleChange} /> : <span>{plan.author}</span>}
+      <Container label="Author">
+        {isEditing ? <input className="w-full rounded-md border-0 py-1.5 pl-1 pr-20 ring-1 ring-inset ring-gray-300" type="text" name="author" value={plan.author} onChange={handleChange} /> : <span>{plan.author}</span>}
       </Container>
-      <Container label="Description" editable updateEditingStatus={updateEditingStatus} isEditing={isEditing}>
-        {isEditing ? <input type="text" name="description" value={plan.description} onChange={handleChange} /> : <span>{plan.description}</span>}
+      <Container label="Description">
+        {isEditing ? <input className="w-full rounded-md border-0 py-1.5 pl-1 pr-20 ring-1 ring-inset ring-gray-300" type="text" name="description" value={plan.description} onChange={handleChange} /> : <span>{plan.description}</span>}
       </Container>
-      <Container label="Start Date" editable updateEditingStatus={updateEditingStatus} isEditing={isEditing}>
-        {isEditing ? <input type="date" name="start_date" value={plan.start_date} onChange={handleChange} /> : <span>{plan.start_date}</span>}
+      <Container label="Start Date">
+        {isEditing ? <input className="w-full" type="date" name="start_date" value={plan.start_date} onChange={handleChange} /> : <span>{plan.start_date}</span>}
       </Container>
-      <Container label="End Date" editable updateEditingStatus={updateEditingStatus} isEditing={isEditing}>
-        {isEditing ? <input type="date" name="end_date" value={plan.end_date} onChange={handleChange} /> : <span>{plan.end_date}</span>}
+      <Container label="End Date">
+        {isEditing ? <input className="w-full" type="date" name="end_date" value={plan.end_date} onChange={handleChange} /> : <span>{plan.end_date}</span>}
       </Container>
       {
         isEditing ? (
-          <EditButton onButtonClick={onEditButtonClick}>Edit</EditButton>
+          <EditButton onButtonClick={onSubmitButtonClick}>Submit</EditButton>
         ) : (
           <DeleteButton onButtonClick={onDeleteButtonClick}>Delete</DeleteButton>
         )
