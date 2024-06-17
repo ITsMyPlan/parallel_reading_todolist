@@ -1,6 +1,8 @@
 import { PlanConfig } from '@types/PlanConfig';
 import { TaskConfig } from '@types/TaskConfig';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAnglesRight, faClock } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from 'react';
 
 interface PlanProps {
@@ -34,16 +36,21 @@ function Plan(props: PlanProps) {
 
   return (
     <div className="border-8 border-solid border-yw-50/50 rounded-lg p-2 flex flex-col mt-5">
-      <button className='bg-yw-100' onClick={goToDetail}>more</button>
-      <div>책 이름: {data.book_name}</div>
+      <div className="flex items-center justify-between">
+        <div className="text-gr-70 font-semibold text-lg">{data.book_name}</div>
+        <FontAwesomeIcon className="text-gr-70" icon={faAnglesRight} onClick={goToDetail} />
+      </div>
       {data.tasks.length > 0 ? data.tasks.map((task: TaskConfig) => {
         return (
           <div key={task.id}>
-            <div>{task.goal}</div>
+            <div className="text-gr-70 text-base font-medium">{task.goal}</div>
           </div>
         );
-      }) : <button className='bg-yw-100' onClick={goToAddTask}>오늘의 목표를 작성해봐요!</button>}
-      <div>D-{daysRemaining}</div>
+      }) : <div className="text-yw-100 font-medium" onClick={goToAddTask}>오늘의 목표를 기다리고 있어요!</div>}
+      <div className="flex items-center gap-2">
+        <FontAwesomeIcon className="text-gr-70" icon={faClock} />
+        <div className="text-gr-70 font-semibold text-base">D-{daysRemaining}</div>
+      </div>
     </div>
   );
 }
