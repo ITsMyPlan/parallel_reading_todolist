@@ -1,4 +1,4 @@
-import SubmitButton from '@components/common/Button';
+import SubmitButton from '@/components/common/Button';
 import InputContainer from '@/components/common/Container';
 import Header from '@/components/common/Header';
 import { useState } from 'react';

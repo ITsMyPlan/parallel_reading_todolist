@@ -1,6 +1,6 @@
-import HomeHeader from '@components/common/Header';
-import PlanList from '@components/home/PlanList';
-import AddButton from '@components/common/Button';
+import HomeHeader from '@/components/common/Header';
+import PlanList from '@/components/home/PlanList';
+import AddButton from '@/components/common/Button';
 import { useNavigate } from 'react-router-dom';
 
 function home() {

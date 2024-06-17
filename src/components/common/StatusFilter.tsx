@@ -1,4 +1,4 @@
-import StatusBadge from '@components/common/StatusBadge'; 
+import StatusBadge from '@/components/common/StatusBadge'; 
   
 function StatusFilter() {
   const types = ['all', 'progress', 'todo', 'done']

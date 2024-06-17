@@ -1,4 +1,4 @@
-import Plan from '@components/common/Plan';
+import Plan from '@/components/common/Plan';
 import { PlanConfig } from '@/types/PlanConfig';
 import { TaskConfig } from '@/types/TaskConfig';
 import { supabase } from '@/supabaseClient.ts';
