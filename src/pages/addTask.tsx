@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
-import { SupabaseError } from '@/types/SupabaseError';
 import { TaskConfig } from '@/types/TaskConfig';
 import { supabase } from '@/supabaseClient.ts';
 import Container from '@/components/common/Container';

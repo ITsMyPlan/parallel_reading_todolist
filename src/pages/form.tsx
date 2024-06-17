@@ -1,7 +1,6 @@
 import SubmitButton from '@components/common/Button';
 import InputContainer from '@/components/common/Container';
 import Header from '@/components/common/Header';
-import { SupabaseError } from '@/types/SupabaseError'; 
 import { useState } from 'react';
 import { supabase } from '@/supabaseClient.ts';
 import { useNavigate } from 'react-router-dom';
