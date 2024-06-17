@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import { supabase } from '@/supabaseClient.js';
-import { PlanConfig } from '@types/PlanConfig';
+import { supabase } from '@/supabaseClient.ts';
+import { PlanConfig } from '@/types/PlanConfig';
 import { SupabaseError } from '@/types/SupabaseError';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
