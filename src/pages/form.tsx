@@ -3,7 +3,7 @@ import InputContainer from '@/components/common/Container';
 import Header from '@/components/common/Header';
 import { SupabaseError } from '@/types/SupabaseError'; 
 import { useState } from 'react';
-import { supabase } from '@/supabaseClient.js';
+import { supabase } from '@/supabaseClient.ts';
 import { useNavigate } from 'react-router-dom';
 
 function form() {
@@ -35,7 +35,7 @@ function form() {
       }
       setFormData(initialFormData);
       navigate('/home');
-    } catch (error: SupabaseError) {
+    } catch (error: any) {
       alert(error.message);
     }
   };
@@ -58,7 +58,7 @@ function form() {
       <InputContainer label="End Date">
         <input type="date" name="end_date" onChange={handleChange} value={formData.end_date} />
       </InputContainer>
-      <SubmitButton onButtonClick={onSubmitButtonClick}>Submit</SubmitButton>
+      <SubmitButton path="" onButtonClick={onSubmitButtonClick}>Submit</SubmitButton>
     </div>
   )
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import { SupabaseError } from '@/types/SupabaseError';
 import { TaskConfig } from '@/types/TaskConfig';
-import { supabase } from '@/supabaseClient.js';
+import { supabase } from '@/supabaseClient.ts';
 import Container from '@/components/common/Container';
 import SubmitButton from '@/components/common/Button';
 
@@ -30,7 +30,7 @@ function addTask() {
         } else {
           setTasks(data);
         }
-      } catch (error:SupabaseError) {
+      } catch (error: any) {
         console.error('Error fetching a plan:', error.message);
       }
     };
@@ -62,7 +62,7 @@ function addTask() {
         } else {
           navigate('/home');
         }
-    } catch (error: SupabaseError) {
+    } catch (error: any) {
       console.log('An error occurred while adding task:', error.message);
     } finally {
       updateWritingStatus(false);
@@ -74,7 +74,7 @@ function addTask() {
       {tasks.map((task: TaskConfig) => {
         return (
           <div key={task.id}>
-            <Container label={task.created_at}>{task.goal}</Container>
+            <Container label={task.created_at.toString()}>{task.goal}</Container>
           </div>
         );
       })}
@@ -82,7 +82,7 @@ function addTask() {
         <input type="text" name="goal" onChange={handleChange}/>
         <input type="date" name="created_at" onChange={handleChange}/>
       </Container>
-      <SubmitButton onButtonClick={onSubmitButtonClick}>Submit</SubmitButton>
+      <SubmitButton path="" onButtonClick={onSubmitButtonClick}>Submit</SubmitButton>
     </>
   );
 }
