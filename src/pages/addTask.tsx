@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { TaskConfig } from '@/types/TaskConfig';
 import { supabase } from '@/supabaseClient.ts';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faAnglesLeft } from "@fortawesome/free-solid-svg-icons";
+import { faAnglesLeft } from "@fortawesome/free-solid-svg-icons";
 import Container from '@/components/common/Container';
 import SubmitButton from '@/components/common/Button';
 import Header from '@/components/common/Header';
