@@ -43,13 +43,13 @@ function form() {
     <div>
       <Header>Add New Reading Plan</Header>
       <InputContainer label="Book name">
-        <input type="text" name="book_name" placeholder='bookName' onChange={handleChange} value={formData.book_name} />
+        <input className='border-2 border-gray-300 focus:border-yw-100 focus:outline-none' type="text" name="book_name" placeholder='bookName' onChange={handleChange} value={formData.book_name} />
       </InputContainer>
       <InputContainer label="Author">
-        <input type="text" name="author" placeholder='authorName' onChange={handleChange} value={formData.author} />
+        <input className='border-2 border-gray-300 focus:border-yw-100 focus:outline-none' type="text" name="author" placeholder='authorName' onChange={handleChange} value={formData.author} />
       </InputContainer>
       <InputContainer label="Description">
-        <input type="text" name="description" placeholder='description' onChange={handleChange} value={formData.description} />
+        <input className='border-2 border-gray-300 focus:border-yw-100 focus:outline-none' type="text" name="description" placeholder='description' onChange={handleChange} value={formData.description} />
       </InputContainer>
       <InputContainer label="Start Date">
         <input type="date" name="start_date" onChange={handleChange} value={formData.start_date} />
